@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 min-h-screen antialiased transition-colors duration-300;
+  font-family: var(--font-sans);
+}
+
+.dark body {
+  @apply bg-[#080808] text-slate-100;
+}
+
+/* Prism Editor Overrides */
+.prism-editor {
+  @apply w-full h-full;
+}
+
+.prism-editor textarea {
+  @apply outline-none !important;
+}
+
+.dark .prism-editor pre {
+  @apply bg-transparent !important;
+}
+
+.dark .token.tag,
+.dark .token.atrule,
+.dark .token.attr-value,
+.dark .token.keyword {
+  color: #7dd3fc;
+}
+
+.dark .token.punctuation {
+  color: #94a3b8;
+}
+
+.dark .token.attr-name {
+  color: #fbbf24;
+}
+
+.dark .token.string {
+  color: #34d399;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-full hover:bg-slate-400;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  @apply bg-zinc-800 hover:bg-zinc-700;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
