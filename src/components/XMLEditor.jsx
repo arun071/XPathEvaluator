@@ -1,23 +1,12 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-markup'; // This handles XML/HTML highlighting
 import 'prismjs/themes/prism-tomorrow.css';
 
 const XMLEditor = ({ value, onChange, error }) => {
-  const containerRef = useRef(null);
-
   const lineCount = value.split('\n').length;
   const lineNumbers = Array.from({ length: Math.max(lineCount, 1) }, (_, i) => i + 1);
-
-  // Sync scroll between editor and line numbers
-  const handleScroll = (e) => {
-    const { scrollTop } = e.target;
-    const lineNumberDiv = document.getElementById('line-numbers');
-    if (lineNumberDiv) {
-      lineNumberDiv.scrollTop = scrollTop;
-    }
-  };
 
   return (
     <div className="flex flex-col h-full bg-slate-50 dark:bg-[#111111] backdrop-blur-md rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-2xl transition-all">
@@ -41,34 +30,37 @@ const XMLEditor = ({ value, onChange, error }) => {
         )}
       </div>
       
-      <div className="flex flex-1 overflow-hidden relative">
-        <div 
-          id="line-numbers"
-          className="w-12 bg-slate-100 dark:bg-black/20 text-slate-400 dark:text-slate-600 text-right pr-3 pt-4 code-font text-xs select-none overflow-hidden border-r border-slate-200 dark:border-white/5"
-        >
-          {lineNumbers.map(n => (
-            <div key={n} className="h-6 leading-6">{n}</div>
-          ))}
-        </div>
-        
-        <div className="flex-1 relative overflow-auto custom-scrollbar pt-1 bg-white dark:bg-transparent" onScroll={handleScroll}>
-          <Editor
-            value={value}
-            onValueChange={onChange}
-            highlight={code => highlight(code, languages.markup)}
-            padding={16}
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 13,
-              minHeight: '100%',
-              backgroundColor: 'transparent',
-              outline: 'none',
-              lineHeight: '1.5rem',
-            }}
-            className="prism-editor dark:text-slate-300 text-slate-700"
-            textareaClassName="outline-none focus:outline-none"
-            preClassName="m-0"
-          />
+      <div className="flex-1 overflow-hidden relative bg-white dark:bg-[#0a0a0a]">
+        <div className="absolute inset-0 overflow-auto custom-scrollbar pt-0">
+          <div className="flex min-h-full min-w-full">
+            <div 
+              className="sticky left-0 z-10 w-12 bg-slate-100 dark:bg-[#1a1a1a] text-slate-400 dark:text-slate-600 text-right pr-3 pt-[16px] font-mono text-[13px] select-none border-r border-slate-200 dark:border-white/5 h-auto self-stretch"
+            >
+              {lineNumbers.map(n => (
+                <div key={n} className="h-6 leading-6">{n}</div>
+              ))}
+            </div>
+            
+            <div className="flex-1 min-w-0">
+              <Editor
+                value={value}
+                onValueChange={onChange}
+                highlight={code => highlight(code, languages.markup)}
+                padding={16}
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 13,
+                  minHeight: '100%',
+                  backgroundColor: 'transparent',
+                  outline: 'none',
+                  lineHeight: '1.5rem',
+                }}
+                className="prism-editor dark:text-slate-300 text-slate-700"
+                textareaClassName="outline-none focus:outline-none"
+                preClassName="m-0"
+              />
+            </div>
+          </div>
         </div>
       </div>
       
