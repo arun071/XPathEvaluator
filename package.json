@@ -2,16 +2,12 @@
   "name": "xpath-evaluator",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://arun071.github.io/XPathEvaluator/",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "tailwind:watch": "npx tailwindcss -i ./src/index.css -o ./src/output.css --watch",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "preview": "vite preview"
   },
   "dependencies": {
     "lucide-react": "^0.563.0",
@@ -19,9 +15,7 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hot-toast": "^2.6.0",
-    "react-router-dom": "^7.13.0",
-    "react-simple-code-editor": "^0.14.1",
-    "vite-react-typescript-starter": "file:../ui-kit/vite-react-typescript-starter-0.0.0.tgz"
+    "react-simple-code-editor": "^0.14.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
