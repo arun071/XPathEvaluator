@@ -21,6 +21,13 @@ body {
   @apply w-full;
 }
 
+.prism-editor textarea,
+.prism-editor pre {
+  @apply m-0 overflow-visible !important;
+  font-family: var(--font-mono) !important;
+  line-height: 1.5rem !important;
+}
+
 .prism-editor textarea {
   @apply outline-none !important;
 }

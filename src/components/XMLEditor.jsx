@@ -4,6 +4,10 @@ import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-markup'; // This handles XML/HTML highlighting
 import 'prismjs/themes/prism-tomorrow.css';
 
+const LINE_HEIGHT = '1.5rem';
+const EDITOR_PADDING = 16;
+const FONT_SIZE = 13;
+
 const XMLEditor = ({ value, onChange, error }) => {
   const lineCount = value.split('\n').length;
   const lineNumbers = Array.from({ length: Math.max(lineCount, 1) }, (_, i) => i + 1);
@@ -34,10 +38,16 @@ const XMLEditor = ({ value, onChange, error }) => {
         <div className="absolute inset-0 overflow-auto custom-scrollbar pt-0">
           <div className="flex min-h-full min-w-full">
             <div 
-              className="sticky left-0 z-10 w-12 bg-slate-100 dark:bg-[#1a1a1a] text-slate-400 dark:text-slate-600 text-right pr-3 pt-[16px] font-mono text-[13px] select-none border-r border-slate-200 dark:border-white/5 h-auto self-stretch"
+              className="sticky left-0 z-10 w-12 bg-slate-100 dark:bg-[#1a1a1a] text-slate-400 dark:text-slate-600 text-right pr-3 select-none border-r border-slate-200 dark:border-white/5 h-auto self-stretch"
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: FONT_SIZE,
+                lineHeight: LINE_HEIGHT,
+                paddingTop: EDITOR_PADDING,
+              }}
             >
               {lineNumbers.map(n => (
-                <div key={n} className="h-6 leading-6">{n}</div>
+                <div key={n} style={{ height: LINE_HEIGHT }}>{n}</div>
               ))}
             </div>
             
@@ -46,14 +56,14 @@ const XMLEditor = ({ value, onChange, error }) => {
                 value={value}
                 onValueChange={onChange}
                 highlight={code => highlight(code, languages.markup)}
-                padding={16}
+                padding={EDITOR_PADDING}
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: 13,
+                  fontSize: FONT_SIZE,
                   minHeight: '100%',
                   backgroundColor: 'transparent',
                   outline: 'none',
-                  lineHeight: '1.5rem',
+                  lineHeight: LINE_HEIGHT,
                 }}
                 className="prism-editor dark:text-slate-300 text-slate-700"
                 textareaClassName="outline-none focus:outline-none"
